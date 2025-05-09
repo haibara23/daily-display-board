@@ -1,15 +1,17 @@
-import hashlib
-
 from datetime import datetime, timedelta
 import hashlib
 import os
 
-# 한국 시간으로 오늘 날짜
-today = (datetime.utcnow() + timedelta(hours=9)).strftime("%Y-%m-%d")
+# 한국 시간 기준 날짜 및 시간
+now = datetime.utcnow() + timedelta(hours=9)
+today = now.strftime("%Y-%m-%d")
+timestamp = now.strftime("%Y-%m-%d %H:%M:%S")
+
+# 해시 생성
 token = hashlib.sha256(("secretkey" + today).encode()).hexdigest()[:8]
 filename = f"board_{token}.html"
 
-# HTML 템플릿 내용
+# HTML 템플릿 내용 (timestamp 삽입)
 html = f"""<!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -38,6 +40,7 @@ html = f"""<!DOCTYPE html>
   <iframe
     src="https://docs.google.com/spreadsheets/d/e/2PACX-1vTvfx5eFL1CTC-hG6Ovhunf44oj7aQ8W2NeCMgx9jLOFFNtyrF2RurcBrr9uJVzlJBJ_HMguOQsd_lY/pubhtml?gid=894608935&single=true&widget=true&headers=false&range=C8:E34">
   </iframe>
+  <!-- Generated at {timestamp} -->
 </body>
 </html>
 """
