@@ -1,9 +1,11 @@
 import hashlib
-from datetime import datetime
+
+from datetime import datetime, timedelta
+import hashlib
 import os
 
-# 오늘 날짜 기반 토큰 생성
-today = datetime.today().strftime("%Y-%m-%d")
+# 한국 시간으로 오늘 날짜
+today = (datetime.utcnow() + timedelta(hours=9)).strftime("%Y-%m-%d")
 token = hashlib.sha256(("secretkey" + today).encode()).hexdigest()[:8]
 filename = f"board_{token}.html"
 
