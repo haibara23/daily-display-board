@@ -1,0 +1,4 @@
+echo "/qr-codes/*   /qr-codes/:splat   200" > _redirects
+git add _redirects
+git commit -m "Add Netlify _redirects file for QR image access"
+git push
