@@ -5,3 +5,4 @@
   from = "/qr-codes/*"
   to = "/qr-codes/:splat"
   status = 200
+
